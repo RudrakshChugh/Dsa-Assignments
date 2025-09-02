@@ -127,29 +127,34 @@ int main()
     vector<int> symmetric_array(symmetric_size);
 
     cout << "Enter " << symmetric_size << " elements for a symmetric matrix (upper part):" << endl;
-    for (i = 0; i < symmetric_size; i++)
-    {
-        cin >> symmetric_array[i];
-    }
-    cout << "The symmetric matrix is:" << endl;
+    int index = 0;
+    vector<vector<int>> matrix(N, vector<int>(N, 0));
+
     for (i = 0; i < N; i++)
     {
-        for (j = 0; j < N; j++)
+        for (j = i; j < N; j++)
         {
-            if (i <= j)
+            cin >> matrix[i][j];
+        }
+
+        for (i = 0; i < N; i++)
+        {
+            for (j = i + 1; j < N; j++)
             {
-                k = (i * N) - (i * (i + 1) / 2) + (j - i);
-                cout << symmetric_array[k] << " ";
-            }
-            else
-            {
-                k = (j * N) - (j * (j + 1) / 2) + (i - j);
-                cout << symmetric_array[k] << " ";
+                matrix[j][i] = matrix[i][j];
             }
         }
-        cout << endl;
-    }
 
+        cout << "The symmetric matrix is:" << endl;
+        for (i = 0; i < N; i++)
+        {
+            for (j = 0; j < N; j++)
+            {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
     return 0;
 }
 
