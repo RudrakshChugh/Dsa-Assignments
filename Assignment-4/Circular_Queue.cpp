@@ -3,63 +3,61 @@ it a normal queue just difference is
  When rear reaches the end of the array, it wraps around to the front if there is empty space.
 */
 
-#include <iostream>                   // For input/output operations
+#include <iostream>                  
 using namespace std;
 
 class CircularQueue {
-    int* arr;                         // Dynamically allocated array to hold queue elements
-    int front;                        // Points to the front element of the queue
-    int rear;                         // Points to the last element inserted
-    int size;                         // Maximum size of the queue
+    int* arr;                         
+    int front;                         
+    int rear;                         
+    int size;                         
 
 public:
     
     CircularQueue(int n) {
-        size = n;                     // Set the size of the queue
-        arr = new int[size];         // Allocate memory for the queue
-        front = rear = -1;           // Initialize front and rear as -1 (queue is empty)
+        size = n;                     
+        arr = new int[size];         
+        front = rear = -1;           
     }
 
-    // Enqueue: insert an element into the circular queue
+    
     bool enqueue(int value) {
-        // Condition to check if queue is full
         if ((front == 0 && rear == size - 1) || (rear == (front - 1 + size) % size)) {
-            return false;            // Return false if insertion not possible
+            return false;            
         }
-        else if (front == -1) {      // First element to be inserted
-            front = rear = 0;        // Set front and rear to 0
+        else if (front == -1) {      
+            front = rear = 0;        
         }
         else if (rear == size - 1 && front != 0) {
-            rear = 0;                // Wrap around rear to 0 (circular)
+            rear = 0;                
         }
         else {
-            rear++;                  // Move rear to next index normally
+            rear++;                 
         }
 
-        arr[rear] = value;           // Insert the value at rear index
-        return true;                 // Return true indicating successful insertion
+        arr[rear] = value;           
+        return true;                 
     }
 
-    // Dequeue: remove an element from the front of the circular queue
     int dequeue() {
-        if (front == -1) {           // Check if queue is empty
-            return -1;               // Return -1 if no elements to remove
+        if (front == -1) {          
+            return -1;               
         }
 
-        int ans = arr[front];        // Store the value to be removed
-        arr[front] = -1;             // Optional: mark the slot as empty
+        int ans = arr[front];        
+        arr[front] = -1;           
 
-        if (front == rear) {         // Queue has only one element
-            front = rear = -1;       // Reset to empty state
+        if (front == rear) {
+            front = rear = -1;       
         }
         else if (front == size - 1) {
-            front = 0;               // Wrap around front to 0 (circular)
+            front = 0;              
         }
         else {
-            front++;                 // Move front to next index normally
+            front++;                
         }
 
-        return ans;                  // Return the dequeued element
+        return ans;                 
     }
 };
 
@@ -72,10 +70,11 @@ int main() {
     q.enqueue(20);
     q.enqueue(30);
     q.enqueue(40);
-    q.enqueue(50); // Should fail if queue is full
+    q.enqueue(50); 
 
-    cout << q.dequeue() << endl; // 10
-    q.enqueue(60);               // Wraps around
+    cout << q.dequeue() << endl; 
+    q.enqueue(60);               
 
-    cout << q.dequeue() << endl; // 20
+    cout << q.dequeue() << endl; 
 }
+
