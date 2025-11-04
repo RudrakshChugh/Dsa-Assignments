@@ -88,7 +88,7 @@ public:
 
 int main() {
 int choice, value;
-    Queue q;   // ✅ uses fixed size = 100001
+    Queue q; 
 
     do {
         cout << "\n--- Queue Menu ---\n";
@@ -137,3 +137,4 @@ int choice, value;
 
     return 0;
 }
+
